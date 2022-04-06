@@ -1,0 +1,39 @@
+package com.finance.springapp.dao;
+
+import org.springframework.stereotype.Repository;
+
+import com.finance.springapp.entities.AdminLogin;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.transaction.Transactional;
+
+import java.util.List;
+
+/**
+ * marking with @Repository is similar to @Component but used for Dao implementation classes,
+ * spring will keep instance of AdminDaoImpl and the object will be kept in bean factory
+ *
+ */
+@Repository
+@Transactional
+public class AdminDaoImpl implements AdminDao{
+
+	@PersistenceContext              
+    private EntityManager em;
+
+    @Override
+    public List<AdminLogin> getallAdmins(){
+       Query q= em.createQuery("from AdminLogin");
+       List <AdminLogin> list=q.getResultList();
+       return list;
+    }
+	
+}
+
+
+	
+	
+
+
